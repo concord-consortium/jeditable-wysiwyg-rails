@@ -1,4 +1,4 @@
-# jeditable-rails [![Build Status](http://travis-ci.org/afeld/jeditable-rails.png)](http://travis-ci.org/afeld/jeditable-rails)
+# jeditable-rails
 
 A gem to add in-place-editable fields to your Rails project.  It is a wrapper for the [Jeditable](http://www.appelsiini.net/projects/jeditable) jQuery plugin, so most options for `$.editable()` can be passed through the `options` parameter of the helpers.
 
