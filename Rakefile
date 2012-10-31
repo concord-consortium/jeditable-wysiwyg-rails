@@ -13,12 +13,12 @@ require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "jeditable-rails"
-  gem.homepage = "http://github.com/afeld/jeditable-rails"
+  gem.homepage = "http://github.com/pjmorse/jeditable-rails"
   gem.license = "MIT"
   gem.summary = %Q{An edit-in-place gem for Rails 3}
-  gem.description = %Q{An edit-in-place gem that uses the JEditable jQuery plugin to post updates to the server via AJAX.}
-  gem.email = "aidan.feldman@gmail.com"
-  gem.authors = ["Aidan Feldman"]
+  gem.description = %Q{An edit-in-place gem using the JEditable jQuery plugin set up for the Rails 3 asset pipeline.}
+  gem.email = "pmorse@concord.org"
+  gem.authors = ["Aidan Feldman", "Parker Morse"]
   # Include your dependencies below. Runtime dependencies are required when using your gem,
   # and development dependencies are only needed for development (ie running rake tasks, tests, etc)
   #  gem.add_runtime_dependency 'jabber4r', '> 0.1'
