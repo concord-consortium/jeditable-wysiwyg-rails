@@ -12,7 +12,7 @@ This gem is derived from the [`jeditable-rails`](https://github.com/afeld/jedita
 
 Assuming a Rails 3 project, in your Gemfile, add:
 
-    gem 'jeditable_wysiwyg_rails'
+    gem 'jeditable_wysiwyg_rails', :git => 'git://github.com/pjmorse/jeditable-wysiwyg-rails.git'
 
 Then add this to your application's `app/assets/javascripts/application.js` file:
 
@@ -26,6 +26,10 @@ If you plan to use jWYSIWYG, also add these lines:
 
     //= require jquery.wysiwyg
     //= require jquery.jeditable.wysiwyg
+
+You will also need to add this to your `app/assets/stylesheets/application.css` file to include jWYSIWYG's CSS:
+
+    *= require jquery.wysiwyg
 
 If you plan to use markItUp, add these lines:
 
