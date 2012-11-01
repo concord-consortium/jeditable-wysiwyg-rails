@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = "jeditable-wysiwyg-rails"
-  s.version = "0.1.1"
+  s.version = "0.0.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Aidan Feldman", "Parker Morse"]
@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
     "README.md",
     "Rakefile",
     "VERSION",
-    "jeditable-rails.gemspec",
+    "jeditable-wysiwyg-rails.gemspec",
     "lib/assets/images/bold.png",
     "lib/assets/images/clean.png",
     "lib/assets/images/image.png",
@@ -46,6 +46,7 @@ Gem::Specification.new do |s|
     "lib/assets/stylesheets/jquery.wysiwyg.css",
     "lib/jeditable-wysiwyg-rails.rb",
     "lib/jeditable-wysiwyg-rails/base.rb",
+    "lib/jeditable-wysiwyg-rails/engine.rb",
     "lib/jeditable-wysiwyg-rails/helpers/jeditable_helper.rb",
     "spec/dummy/.gitignore",
     "spec/dummy/Gemfile",
