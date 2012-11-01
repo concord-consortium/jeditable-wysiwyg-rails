@@ -14,6 +14,24 @@ Assuming a Rails 3 project, in your Gemfile, add:
 
     gem 'jeditable_wysiwyg_rails'
 
+Then add this to your application's `app/assets/javascripts/application.js` file:
+
+    //= require jquery
+    //= require jquery_ujs
+    //= require jquery.jeditable
+
+The first two lines may already be present; those scripts are provided by `jquery-rails`, which you should have installed.
+
+If you plan to use jWYSIWYG, also add these lines:
+
+    //= require jquery.wysiwyg
+    //= require jquery.jeditable.wysiwyg
+
+If you plan to use markItUp, add these lines:
+
+    //= require jquery.markitup
+    //= require jquery.jeditable.markitup
+
 ## Usage
 
 Suppose you have a `User` model with a `#zip_code` attribute.
@@ -47,6 +65,27 @@ def update
   }
 end
 ```
+
+To add a textarea with the jWYSIWYG editor, say for the `#biography` attribute of the `User` model, you'll include additional parameters to the `editable_field` helper:
+
+```erb
+<%# app/views/users/show.html.erb %>
+<h1>View/Edit your profile</h1>
+...
+<b>Biography:</b>
+<%= editable_field @user, :biography %>
+<%= editable_field @user, :biography, {  :type => 'wysiwyg',
+                                         :rows => 10,
+                                         :cols => 80,
+                                         :submit => 'OK',
+                                         :onblur => 'ignore',
+                                         :wysiwyg => { :debug => false }
+                                       } %>
+```
+
+N.B. the `rows` and `cols` options are vital to making sure Jeditable does not present a `textarea` of such small size as to be unusable!
+
+For a complete list of parameters Jeditable accepts, [see its documentation](http://www.appelsiini.net/projects/jeditable). In this example, the `wysiwyg` parameter contains the options to be passed along to jWYSIWYG; it should not be empty or missing.
 
 ## Copyright
 
