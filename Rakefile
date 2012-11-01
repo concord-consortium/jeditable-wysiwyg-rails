@@ -10,6 +10,8 @@ end
 require 'rake'
 
 require 'jeweler'
+$:.push File.expand_path("../lib", __FILE__)
+require 'jeditable_wysiwyg_rails/version'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "jeditable_wysiwyg_rails"
@@ -19,6 +21,7 @@ Jeweler::Tasks.new do |gem|
   gem.description = %Q{An edit-in-place gem using the JEditable jQuery plugin set up for the Rails 3 asset pipeline.}
   gem.email = "pmorse@concord.org"
   gem.authors = ["Aidan Feldman", "Parker Morse"]
+  gem.version = JeditableWysiwygRails::VERSION
   # Include your dependencies below. Runtime dependencies are required when using your gem,
   # and development dependencies are only needed for development (ie running rake tasks, tests, etc)
   #  gem.add_runtime_dependency 'jabber4r', '> 0.1'
@@ -41,8 +44,7 @@ task :default => :spec
 
 require 'rdoc/task'
 Rake::RDocTask.new do |rdoc|
-  version = File.exist?('VERSION') ? File.read('VERSION') : ""
-
+  version = JeditableWysiwygRails::VERSION
   rdoc.rdoc_dir = 'rdoc'
   rdoc.title = "jeditable_wysiwyg_rails #{version}"
   rdoc.rdoc_files.include('README*')
