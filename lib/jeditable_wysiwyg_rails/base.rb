@@ -1,4 +1,4 @@
-require 'jeditable-rails/helpers/jeditable_helper'
+require 'jeditable_wysiwyg_rails/helpers/jeditable_helper'
 
 module ActionView
   class Base
