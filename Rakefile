@@ -12,7 +12,7 @@ require 'rake'
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
-  gem.name = "jeditable-wysiwyg-rails"
+  gem.name = "jeditable_wysiwyg_rails"
   gem.homepage = "http://github.com/pjmorse/jeditable-wysiwyg-rails"
   gem.license = "MIT"
   gem.summary = %Q{An edit-in-place gem for Rails 3}
@@ -44,7 +44,7 @@ Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "jeditable-wysiwyg-rails #{version}"
+  rdoc.title = "jeditable_wysiwyg_rails #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
