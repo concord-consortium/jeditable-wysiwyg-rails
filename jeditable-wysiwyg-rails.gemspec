@@ -4,12 +4,12 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = "jeditable-rails"
+  s.name = "jeditable-wysiwyg-rails"
   s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Aidan Feldman", "Parker Morse"]
-  s.date = "2012-10-31"
+  s.date = "2012-11-01"
   s.description = "An edit-in-place gem using the JEditable jQuery plugin set up for the Rails 3 asset pipeline."
   s.email = "pmorse@concord.org"
   s.extra_rdoc_files = [
@@ -18,7 +18,6 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     ".document",
-    "CHANGELOG.markdown",
     "Gemfile",
     "LICENSE.txt",
     "README.md",
@@ -45,9 +44,9 @@ Gem::Specification.new do |s|
     "lib/assets/javascripts/set.js",
     "lib/assets/stylesheets/jquery.markitup.css",
     "lib/assets/stylesheets/jquery.wysiwyg.css",
-    "lib/jeditable-rails.rb",
-    "lib/jeditable-rails/base.rb",
-    "lib/jeditable-rails/helpers/jeditable_helper.rb",
+    "lib/jeditable-wysiwyg-rails.rb",
+    "lib/jeditable-wysiwyg-rails/base.rb",
+    "lib/jeditable-wysiwyg-rails/helpers/jeditable_helper.rb",
     "spec/dummy/.gitignore",
     "spec/dummy/Gemfile",
     "spec/dummy/README",
@@ -99,7 +98,7 @@ Gem::Specification.new do |s|
     "spec/helpers/jeditable_helper_spec.rb",
     "spec/spec_helper.rb"
   ]
-  s.homepage = "http://github.com/pjmorse/jeditable-rails"
+  s.homepage = "http://github.com/pjmorse/jeditable-wysiwyg-rails"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.24"
