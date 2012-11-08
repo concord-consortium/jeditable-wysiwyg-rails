@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "jeditable_wysiwyg_rails"
-  s.version = "0.1.0"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Aidan Feldman", "Parker Morse"]
-  s.date = "2012-11-01"
+  s.date = "2012-11-08"
   s.description = "An edit-in-place gem using the JEditable jQuery plugin set up for the Rails 3 asset pipeline."
   s.email = "pmorse@concord.org"
   s.extra_rdoc_files = [
