@@ -46,5 +46,26 @@ module JeditableHelper
       </script>
     }.html_safe
   end
+
+  # Creates an editable span for the given property of the given object,
+  # with the edit triggered by a click on the following "Edit" div (which
+  # may be styled into a button). This essentially wraps the editable_field
+  # helper with some extra HTML.
+  def editable_with_trigger(object, property, options={})
+    name = "#{object.class.to_s.underscore}[#{property}]"
+    trigger_name = "#{object.class.to_s.underscore}[#{property}]_trigger"
+    args = { :event => 'edit-click', :edit_string => 'Edit' }.merge(options) # bind the edit trigger to 'edit-click'
+    # Add the trigger span
+    %{
+      #{editable_field(object, property, args)}
+      <span class="edit_trigger" id="#{trigger_name}">#{args[:edit_string]}</span>
+      <script type="text/javascript">
+        /* Find and trigger "edit-click" event on correct Jeditable instance. */
+        $(".edit_trigger[id='#{trigger_name}']").bind("click", function() {
+            $(".editable[data-id='#{object.id}'][data-name='#{name}']").trigger("edit-click");
+        });
+      </script>
+    }.html_safe
+  end
 end
 
