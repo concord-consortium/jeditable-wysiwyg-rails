@@ -20,11 +20,23 @@ module JeditableHelper
   #   The <tt>name</tt> attribute to be used when the form is posted.
   # [:update_url]
   #   The URL to submit the form to.  Defaults to <tt>url_for(object)</tt>.
+  # [:use_trigger]
+  #   Boolean: if true, use :edit_string (default: 'Edit') as a button
+  #   which starts edit mode.
+  # [:edit_string]
+  #   If :use_trigger is true, this string will be used as the text of a 
+  #   button which starts edit mode. Defaults to "Edit".
+  # [:open_if_empty]
+  #   Boolean: If true and the attribute being edited is blank (nil or '')
+  #   the editable area will open edit mode immediately rather than waiting
+  #   for a trigger event.
   def editable_field(object, property, options={})
     name = "#{object.class.to_s.underscore}[#{property}]"
     value = object.send property
     update_url = options.delete(:update_url) || url_for(object)
-    args = {:method => 'PUT', :name => name}.merge(options)
+    trigger_event = options[:use_trigger] ? 'edit-click' : 'click'
+    open_in_edit = options[:open_if_empty] ? ".trigger('#{trigger_event}')" : ''
+    args = {:method => 'PUT', :name => name, :event => trigger_event }.merge(options)
     %{
       <span class="editable" data-id="#{object.id}" data-name="#{name}">#{value}</span>
       <script type="text/javascript">
@@ -40,29 +52,23 @@ module JeditableHelper
               return retval;
             }};
             $.extend(args, #{args.to_json});
-            $(".editable[data-id='#{object.id}'][data-name='#{name}']").editable("#{update_url}", args);
+            $(".editable[data-id='#{object.id}'][data-name='#{name}']").editable("#{update_url}", args)#{open_in_edit};
           });
         })( jQuery );
       </script>
+      #{editable_trigger(name, options[:edit_string], object.id) if options[:use_trigger]}
     }.html_safe
   end
 
-  # Creates an editable span for the given property of the given object,
-  # with the edit triggered by a click on the following "Edit" div (which
-  # may be styled into a button). This essentially wraps the editable_field
-  # helper with some extra HTML.
-  def editable_with_trigger(object, property, options={})
-    name = "#{object.class.to_s.underscore}[#{property}]"
-    trigger_name = "#{object.class.to_s.underscore}[#{property}]_trigger"
-    args = { :event => 'edit-click', :edit_string => 'Edit' }.merge(options) # bind the edit trigger to 'edit-click'
-    # Add the trigger span
+  # Creates a trigger to open edit mode on an editable span.
+  def editable_trigger(name, edit_string, object_id)
+    trigger_name = "#{name}_trigger"
     %{
-      #{editable_field(object, property, args)}
-      <span class="edit_trigger" id="#{trigger_name}">#{args[:edit_string]}</span>
+      <span class="edit_trigger" id="#{trigger_name}">#{edit_string}</span>
       <script type="text/javascript">
         /* Find and trigger "edit-click" event on correct Jeditable instance. */
         $(".edit_trigger[id='#{trigger_name}']").bind("click", function() {
-            $(".editable[data-id='#{object.id}'][data-name='#{name}']").trigger("edit-click");
+            $(".editable[data-id='#{object_id}'][data-name='#{name}']").trigger("edit-click");
         });
       </script>
     }.html_safe
