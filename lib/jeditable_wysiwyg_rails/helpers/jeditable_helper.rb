@@ -35,7 +35,7 @@ module JeditableHelper
     value = object.send property
     update_url = options.delete(:update_url) || url_for(object)
     trigger_event = options[:use_trigger] ? 'edit-click' : 'click'
-    open_in_edit = options[:open_if_empty] ? ".trigger('#{trigger_event}')" : ''
+    open_in_edit = (options[:open_if_empty] && value.blank?) ? ".trigger('#{trigger_event}')" : ''
     args = {:method => 'PUT', :name => name, :event => trigger_event }.merge(options)
     %{
       <span class="editable" data-id="#{object.id}" data-name="#{name}">#{value}</span>
