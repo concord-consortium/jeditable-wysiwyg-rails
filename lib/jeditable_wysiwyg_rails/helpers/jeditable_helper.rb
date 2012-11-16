@@ -34,7 +34,11 @@ module JeditableHelper
     name = "#{object.class.to_s.underscore}[#{property}]"
     value = object.send property
     update_url = options.delete(:update_url) || url_for(object)
-    trigger_event = options[:use_trigger] ? 'edit-click' : 'click'
+    trigger_event = 'click'
+    trigger_reset = ''
+    if options[:use_trigger]
+      trigger_event = 'edit-click'
+    end
     open_in_edit = (options[:open_if_empty] && value.blank?) ? ".trigger('#{trigger_event}')" : ''
     args = {:method => 'PUT', :name => name, :event => trigger_event }.merge(options)
     %{
@@ -62,6 +66,10 @@ module JeditableHelper
 
   # Creates a trigger to open edit mode on an editable span.
   def editable_trigger(name, edit_string, object_id)
+    # We should be able to hide the trigger when the window opens and re-show it on save/reset.
+    # The hiding can be done by adding the below after triggering edit-click.
+    # $(".edit_trigger[id='#{trigger_name}']").toggle(); /* Hide the trigger */
+    # The re-show, so far, has defeated me.
     trigger_name = "#{name}_trigger"
     %{
       <span class="edit_trigger" id="#{trigger_name}">#{edit_string}</span>
