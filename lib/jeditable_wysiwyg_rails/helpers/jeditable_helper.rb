@@ -38,9 +38,10 @@ module JeditableHelper
     trigger_reset = ''
     if options[:use_trigger]
       trigger_event = 'edit-click'
+      trigger_reset = "{onreset: window.showTrigger_#{object.class.to_s.underscore}_#{property}, onsave: window.showTrigger_#{object.class.to_s.underscore}_#{property}}"
     end
     open_in_edit = (options[:open_if_empty] && value.blank?) ? ".trigger('#{trigger_event}')" : ''
-    args = {:method => 'PUT', :name => name, :event => trigger_event }.merge(options)
+    args = {:method => 'PUT', :name => name, :event => trigger_event}.merge(options)
     %{
       <span class="editable" data-id="#{object.id}" data-name="#{name}">#{value}</span>
       <script type="text/javascript">
@@ -55,10 +56,14 @@ module JeditableHelper
                 .replace(/&quot;/gi, "\\\"");
               return retval;
             }};
-            $.extend(args, #{args.to_json});
+            $.extend(args, #{args.to_json}, #{trigger_reset});
             $(".editable[data-id='#{object.id}'][data-name='#{name}']").editable("#{update_url}", args)#{open_in_edit};
           });
         })( jQuery );
+        function showTrigger_#{object.class.to_s.underscore}_#{property}(settings, original) {
+          /* The edit trigger, if it exists, is hidden when edit mode begins; this function restores it if needed. */
+          $(".edit_trigger[id='#{name}_trigger']").toggle();
+        }
       </script>
       #{editable_trigger(name, options[:edit_string], object.id) if options[:use_trigger]}
     }.html_safe
@@ -66,10 +71,6 @@ module JeditableHelper
 
   # Creates a trigger to open edit mode on an editable span.
   def editable_trigger(name, edit_string, object_id)
-    # We should be able to hide the trigger when the window opens and re-show it on save/reset.
-    # The hiding can be done by adding the below after triggering edit-click.
-    # $(".edit_trigger[id='#{trigger_name}']").toggle(); /* Hide the trigger */
-    # The re-show, so far, has defeated me.
     trigger_name = "#{name}_trigger"
     %{
       <span class="edit_trigger" id="#{trigger_name}">#{edit_string}</span>
@@ -77,6 +78,7 @@ module JeditableHelper
         /* Find and trigger "edit-click" event on correct Jeditable instance. */
         $(".edit_trigger[id='#{trigger_name}']").bind("click", function() {
             $(".editable[data-id='#{object_id}'][data-name='#{name}']").trigger("edit-click");
+            $(".edit_trigger[id='#{trigger_name}']").toggle(); /* Hide the trigger */
         });
       </script>
     }.html_safe
