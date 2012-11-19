@@ -41,6 +41,7 @@ module JeditableHelper
       trigger_reset = "{onreset: window.showTrigger_#{object.class.to_s.underscore}_#{property}, onsave: window.showTrigger_#{object.class.to_s.underscore}_#{property}}"
     end
     open_in_edit = (options[:open_if_empty] && value.blank?) ? ".trigger('#{trigger_event}')" : ''
+    visible_trigger = !(options[:open_if_empty] && value.blank?)
     args = {:method => 'PUT', :name => name, :event => trigger_event}.merge(options)
     %{
       <span class="editable" data-id="#{object.id}" data-name="#{name}">#{value}</span>
@@ -65,15 +66,16 @@ module JeditableHelper
           $(".edit_trigger[id='#{name}_trigger']").toggle();
         }
       </script>
-      #{editable_trigger(name, options[:edit_string], object.id) if options[:use_trigger]}
+      #{editable_trigger(name, options[:edit_string], object.id, visible_trigger) if options[:use_trigger]}
     }.html_safe
   end
 
   # Creates a trigger to open edit mode on an editable span.
-  def editable_trigger(name, edit_string, object_id)
+  def editable_trigger(name, edit_string, object_id, visible=true)
     trigger_name = "#{name}_trigger"
+    visibility = visible ? '' : 'style="display: none"'
     %{
-      <span class="edit_trigger" id="#{trigger_name}">#{edit_string}</span>
+      <span class="edit_trigger" id="#{trigger_name}" #{visibility}>#{edit_string}</span>
       <script type="text/javascript">
         /* Find and trigger "edit-click" event on correct Jeditable instance. */
         $(".edit_trigger[id='#{trigger_name}']").bind("click", function() {
@@ -84,4 +86,3 @@ module JeditableHelper
     }.html_safe
   end
 end
-
