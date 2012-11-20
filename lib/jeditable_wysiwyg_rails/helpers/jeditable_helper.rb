@@ -38,7 +38,7 @@ module JeditableHelper
     trigger_reset = ''
     if options[:use_trigger]
       trigger_event = 'edit-click'
-      trigger_reset = "{onreset: window.showTrigger_#{object.class.to_s.underscore}_#{property}, onsave: window.showTrigger_#{object.class.to_s.underscore}_#{property}}"
+      trigger_reset = "{onreset: window.showTrigger_#{object.class.to_s.underscore}_#{property}, onsubmit: window.showTrigger_#{object.class.to_s.underscore}_#{property}}"
     end
     open_in_edit = (options[:open_if_empty] && value.blank?) ? ".trigger('#{trigger_event}')" : ''
     visible_trigger = !(options[:open_if_empty] && value.blank?)
