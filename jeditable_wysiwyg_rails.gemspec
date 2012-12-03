@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = "jeditable_wysiwyg_rails"
-  s.version = "0.3.6"
+  s.version = "0.3.7"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Aidan Feldman", "Parker Morse"]
@@ -41,6 +41,9 @@ Gem::Specification.new do |s|
     "lib/assets/javascripts/jquery.markitup.js",
     "lib/assets/javascripts/jquery.wysiwyg.js",
     "lib/assets/javascripts/set.js",
+    "lib/assets/javascripts/wysiwyg.image.js",
+    "lib/assets/javascripts/wysiwyg.link.js",
+    "lib/assets/javascripts/wysiwyg.table.js",
     "lib/assets/stylesheets/jquery.markitup.css",
     "lib/assets/stylesheets/jquery.wysiwyg.css",
     "lib/jeditable_wysiwyg_rails.rb",
@@ -130,10 +133,20 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<rspec>, ["~> 2.6"])
       s.add_development_dependency(%q<rspec-rails>, ["~> 2.6"])
       s.add_development_dependency(%q<sqlite3>, [">= 0"])
+      s.add_development_dependency(%q<bundler>, ["~> 1.0"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.5"])
+      s.add_development_dependency(%q<rspec>, ["~> 2.6"])
+      s.add_development_dependency(%q<rspec-rails>, ["~> 2.6"])
+      s.add_development_dependency(%q<sqlite3>, [">= 0"])
     else
       s.add_dependency(%q<jeditable_wysiwyg_rails>, [">= 0"])
       s.add_dependency(%q<rails>, ["~> 3.2.0"])
       s.add_dependency(%q<jquery-rails>, [">= 0"])
+      s.add_dependency(%q<bundler>, ["~> 1.0"])
+      s.add_dependency(%q<jeweler>, ["~> 1.5"])
+      s.add_dependency(%q<rspec>, ["~> 2.6"])
+      s.add_dependency(%q<rspec-rails>, ["~> 2.6"])
+      s.add_dependency(%q<sqlite3>, [">= 0"])
       s.add_dependency(%q<bundler>, ["~> 1.0"])
       s.add_dependency(%q<jeweler>, ["~> 1.5"])
       s.add_dependency(%q<rspec>, ["~> 2.6"])
@@ -159,6 +172,11 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<jeditable_wysiwyg_rails>, [">= 0"])
     s.add_dependency(%q<rails>, ["~> 3.2.0"])
     s.add_dependency(%q<jquery-rails>, [">= 0"])
+    s.add_dependency(%q<bundler>, ["~> 1.0"])
+    s.add_dependency(%q<jeweler>, ["~> 1.5"])
+    s.add_dependency(%q<rspec>, ["~> 2.6"])
+    s.add_dependency(%q<rspec-rails>, ["~> 2.6"])
+    s.add_dependency(%q<sqlite3>, [">= 0"])
     s.add_dependency(%q<bundler>, ["~> 1.0"])
     s.add_dependency(%q<jeweler>, ["~> 1.5"])
     s.add_dependency(%q<rspec>, ["~> 2.6"])
