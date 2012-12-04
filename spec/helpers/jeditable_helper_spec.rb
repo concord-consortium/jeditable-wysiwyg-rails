@@ -2,6 +2,10 @@ require 'spec_helper'
 
 describe JeditableHelper do
   describe "editable_field" do
+    before do
+      helper.stub!(:url_for).and_return('/path')
+    end
+
     it "displays the value of the object" do
       gadget = Gadget.new(:name => 'First')
       helper.editable_field(gadget, :name).should =~ /First/
