@@ -36,6 +36,7 @@ module JeditableHelper
     trigger_id = "#{property_name}_trigger"
     value = object.send property
     update_url = options.delete(:update_url) || url_for(object)
+    trigger_label = options.delete(:edit_string) || 'Edit'
     trigger_event = 'click'
     trigger_reset = ''
     if options[:use_trigger]
@@ -68,7 +69,7 @@ module JeditableHelper
           $(".edit_trigger[id='#{trigger_id}']").toggle();
         }
       </script>
-      #{editable_trigger(name, property_name, options[:edit_string], object.id, visible_trigger) if options[:use_trigger]}
+      #{editable_trigger(name, property_name, trigger_label, object.id, visible_trigger) if options[:use_trigger]}
     }.html_safe
   end
 
