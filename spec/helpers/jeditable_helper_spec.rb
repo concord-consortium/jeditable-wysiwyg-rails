@@ -58,6 +58,11 @@ describe JeditableHelper do
         helper.editable_field(@gadget, :name, { :open_if_empty => true }).should_not =~ /\.trigger\('click'\)/
       end
     end
+
+    context 'when editing a rich-text element' do
+      # Ultimately we need to trust our JS components to be reliable, i.e. they have their own tests.
+      # This component just puts them on the page.
+    end
   end
 
   describe 'editable_field_if' do
