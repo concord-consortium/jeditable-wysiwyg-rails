@@ -19,7 +19,7 @@ require 'rspec/autorun'
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.
 # Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
-Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
+# Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 # run migrations on the dummy project
 # `cd #{File.join('spec', 'dummy')} && rake db:migrate`
@@ -50,4 +50,6 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
+
+  config.include Rails.application.routes.url_helpers
 end
