@@ -38,7 +38,7 @@ module JeditableHelper
     update_url = options.delete(:update_url) || url_for(object)
     trigger_label = options.delete(:edit_string) || 'Edit'
     trigger_event = 'click'
-    trigger_reset = ''
+    trigger_reset = '{}'
     if options[:use_trigger]
       trigger_event = 'edit-click'
       trigger_reset = "{onreset: window.showTrigger_#{property_name}, onsubmit: window.showTrigger_#{property_name} }"
