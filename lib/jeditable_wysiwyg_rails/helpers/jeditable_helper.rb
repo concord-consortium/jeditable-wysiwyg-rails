@@ -46,9 +46,8 @@ module JeditableHelper
     open_in_edit = (options[:open_if_empty] && value.blank?) ? ".trigger('#{trigger_event}')" : ''
     visible_trigger = !(options[:open_if_empty] && value.blank?)
     args = {:method => 'PUT', :name => name, :event => trigger_event}.merge(options)
-    string = %{
-      <span class="editable" data-id="#{object.id}" data-name="#{name}">#{value}</span>
-    }
+
+    string = %{<span class="editable" data-id="#{object.id}" data-name="#{name}">#{value}</span>}
     function = %{
       $(function(){
           var args = {data: function(value, settings) {
@@ -71,11 +70,9 @@ module JeditableHelper
       }
     }
 
-    if content_for(:jquery)
+    if options[:content_for]
       #TODO: support trigger
-      content_for :jquery do 
-        function.html_safe
-      end
+      content_for options[:content_for], function.html_safe
     else
       string += %{
         <script type="text/javascript">
@@ -85,9 +82,9 @@ module JeditableHelper
           #{trigger_function}
         </script>
         #{editable_trigger(name, property_name, trigger_label, object.id, visible_trigger) if options[:use_trigger]}
-      }.html_safe
+      }
     end
-    string
+    string.html_safe
   end
 
   # Creates a trigger to open edit mode on an editable span.
