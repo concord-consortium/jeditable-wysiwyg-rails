@@ -71,6 +71,8 @@ module JeditableHelper
     }
 
     if options[:content_for]
+      previous = content_for(options[:content_for])
+      raise "content_for value must be html_safe for editable_field option" if previous and not previous.html_safe?
       #TODO: support trigger
       content_for options[:content_for], function.html_safe
     else
