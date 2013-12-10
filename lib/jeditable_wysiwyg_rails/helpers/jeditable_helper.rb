@@ -74,7 +74,7 @@ module JeditableHelper
     if content_for(:jquery)
       #TODO: support trigger
       content_for :jquery do 
-        function
+        function.html_safe
       end
     else
       string += %{
