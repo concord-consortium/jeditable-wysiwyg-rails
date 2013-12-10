@@ -46,31 +46,48 @@ module JeditableHelper
     open_in_edit = (options[:open_if_empty] && value.blank?) ? ".trigger('#{trigger_event}')" : ''
     visible_trigger = !(options[:open_if_empty] && value.blank?)
     args = {:method => 'PUT', :name => name, :event => trigger_event}.merge(options)
-    %{
+    string = %{
       <span class="editable" data-id="#{object.id}" data-name="#{name}">#{value}</span>
-      <script type="text/javascript">
-        (function( $ ){
-          $(function(){
-            var args = {data: function(value, settings) {
-              // Unescape HTML
-              var retval = value
-                .replace(/&amp;/gi, '&')
-                .replace(/&gt;/gi, '>')
-                .replace(/&lt;/gi, '<')
-                .replace(/&quot;/gi, "\\\"");
-              return retval;
-            }};
-            $.extend(args, #{args.to_json}, #{trigger_reset});
-            $(".editable[data-id='#{object.id}'][data-name='#{name}']").editable("#{update_url}", args)#{open_in_edit};
-          });
-        })( jQuery );
-        function showTrigger_#{property_name}(settings, original) {
-          /* The edit trigger, if it exists, is hidden when edit mode begins; this function restores it if needed. */
-          $(".edit_trigger[id='#{trigger_id}']").toggle();
-        }
-      </script>
-      #{editable_trigger(name, property_name, trigger_label, object.id, visible_trigger) if options[:use_trigger]}
-    }.html_safe
+    }
+    function = %{
+      $(function(){
+          var args = {data: function(value, settings) {
+            // Unescape HTML
+            var retval = value
+              .replace(/&amp;/gi, '&')
+              .replace(/&gt;/gi, '>')
+              .replace(/&lt;/gi, '<')
+              .replace(/&quot;/gi, "\\\"");
+            return retval;
+          }};
+          $.extend(args, #{args.to_json}, #{trigger_reset});
+          $(".editable[data-id='#{object.id}'][data-name='#{name}']").editable("#{update_url}", args)#{open_in_edit};
+        });
+    }
+    trigger_function = %{
+      function showTrigger_#{property_name}(settings, original) {
+        /* The edit trigger, if it exists, is hidden when edit mode begins; this function restores it if needed. */
+        $(".edit_trigger[id='#{trigger_id}']").toggle();
+      }
+    }
+
+    if content_for(:jquery)
+      #TODO: support trigger
+      content_for :jquery do 
+        function
+      end
+    else
+      string += %{
+        <script type="text/javascript">
+          (function( $ ){
+           #{function}
+          })( jQuery );
+          #{trigger_function}
+        </script>
+        #{editable_trigger(name, property_name, trigger_label, object.id, visible_trigger) if options[:use_trigger]}
+      }.html_safe
+    end
+    string
   end
 
   # Creates a trigger to open edit mode on an editable span.
