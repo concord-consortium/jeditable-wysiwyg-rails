@@ -31,8 +31,9 @@ module JeditableHelper
   #   the editable area will open edit mode immediately rather than waiting
   #   for a trigger event.
   def editable_field(object, property, options={})
-    name = "#{object.class.to_s.underscore}[#{property}]"
-    property_name = "#{object.class.to_s.underscore}_#{property}"
+    root_name = options.delete(:name) || object.class.to_s.underscore
+    name = "#{root_name}[#{property}]"
+    property_name = "#{root_name}_#{property}"
     trigger_id = "#{property_name}_trigger"
     value = object.send property
     update_url = options.delete(:update_url) || url_for(object)
