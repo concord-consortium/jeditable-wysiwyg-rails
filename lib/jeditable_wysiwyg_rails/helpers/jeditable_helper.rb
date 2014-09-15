@@ -79,9 +79,7 @@ module JeditableHelper
     else
       string += %{
         <script type="text/javascript">
-          (function( $ ){
-           #{function}
-          })( jQuery );
+          #{function}
           #{trigger_function}
         </script>
         #{editable_trigger(name, property_name, trigger_label, object.id, visible_trigger) if options[:use_trigger]}
