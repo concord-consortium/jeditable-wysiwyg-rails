@@ -21,8 +21,8 @@ require 'rspec/autorun'
 # Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 # Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
-# run migrations on the dummy project
-# `cd #{File.join('spec', 'dummy')} && rake db:migrate`
+# Run any available migration
+ActiveRecord::Migrator.migrate File.expand_path("../dummy/db/migrate/", __FILE__)
 
 RSpec.configure do |config|
   config.mock_framework = :rspec

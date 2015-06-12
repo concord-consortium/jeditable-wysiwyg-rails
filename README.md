@@ -12,7 +12,7 @@ This gem is derived from the [`jeditable-rails`](https://github.com/afeld/jedita
 
 Assuming a Rails 3 project, in your Gemfile, add:
 
-    gem 'jeditable_wysiwyg_rails', :git => 'git://github.com/pjmorse/jeditable-wysiwyg-rails.git'
+    gem 'jeditable_wysiwyg_rails', :git => 'git://github.com/concord-consortium/jeditable-wysiwyg-rails.git'
 
 Then add this to your application's `app/assets/javascripts/application.js` file:
 

@@ -4,7 +4,7 @@ describe JeditableHelper do
   before do
     # Because this all happens without the context of a request, url_for doesn't
     # work - and we don't need it to.
-    helper.stub!(:url_for).and_return('/path')
+    helper.stub(:url_for).and_return('/path')
     @gadget = Gadget.new(:name => 'First')
   end
 
@@ -26,7 +26,7 @@ describe JeditableHelper do
     end
 
     it 'uses a supplied name parameter' do
-      helper.editable_field(@gadget, :name, { :name => 'special_gadget_name' }).should =~ /"name":"special_gadget_name"/
+      helper.editable_field(@gadget, :name, { :name => 'special_gadget_name' }).should =~ /"name":"special_gadget_name\[name\]"/
     end
 
     it 'calculates a target URL from the object' do
